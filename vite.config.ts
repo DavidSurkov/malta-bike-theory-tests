@@ -1,16 +1,10 @@
 import { createHash } from 'node:crypto';
-import {
-  cpSync,
-  readdirSync,
-  readFileSync,
-  writeFileSync,
-} from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
 
 import { defineConfig } from 'vite';
 
 const DIST_DIRECTORY = resolve('dist');
-const STATIC_FILES = ['icon-192.png', 'icon-512.png'];
 
 const listFiles = (directory: string): string[] =>
   readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
@@ -48,37 +42,11 @@ const createServiceWorker = () => {
 };
 
 export default defineConfig({
-  root: 'static',
-  publicDir: false,
-  resolve: {
-    alias: {
-      '/src': resolve('src'),
-    },
-  },
-  server: {
-    fs: {
-      allow: [resolve('.')],
-    },
-  },
-  build: {
-    emptyOutDir: true,
-    outDir: '../dist',
-  },
+  publicDir: 'static',
   plugins: [
     {
       name: 'prepare-static-site',
       closeBundle: () => {
-        cpSync(resolve('static/assetes'), resolve(DIST_DIRECTORY, 'assetes'), {
-          recursive: true,
-        });
-
-        for (const fileName of STATIC_FILES) {
-          cpSync(
-            resolve('static', fileName),
-            resolve(DIST_DIRECTORY, fileName),
-          );
-        }
-
         createServiceWorker();
       },
     },
