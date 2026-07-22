@@ -53,6 +53,25 @@ summary:focus-visible {
   justify-content: space-between;
 }
 
+.quiz-controls,
+.quiz-controls label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.quiz-controls label span {
+  font-size: 0.85rem;
+}
+
+.quiz-controls select {
+  padding: 8px 28px 8px 10px;
+  color: #17211b;
+  background: white;
+  border: 0;
+  border-radius: 8px;
+}
+
 .top h1 {
   margin: 0;
   font-size: clamp(1.15rem, 3vw, 1.55rem);
@@ -97,6 +116,24 @@ summary:focus-visible {
   font-size: 0.86rem;
 }
 
+.question-heading {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  color: #657269;
+  font-size: 0.9rem;
+}
+
+.timer {
+  min-width: 5ch;
+  color: #9f1621;
+  font-size: 1.15rem;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+}
+
 .tag {
   padding: 4px 9px;
   border: 1px solid #d8ded9;
@@ -108,18 +145,17 @@ summary:focus-visible {
   padding: clamp(20px, 4vw, 34px);
   background: white;
   border: 2px solid #d8ded9;
+  border-left-width: 8px;
   border-radius: 18px;
   transition: border-color 0.2s, background 0.2s;
 }
 
-.question-card.correct {
-  background: #e7f6ed;
-  border-color: #167744;
+.question-card.previous-correct {
+  border-left-color: #167744;
 }
 
-.question-card.incorrect {
-  background: #fdebed;
-  border-color: #b4232d;
+.question-card.previous-incorrect {
+  border-left-color: #b4232d;
 }
 
 h2 {
@@ -275,6 +311,52 @@ button:disabled {
   font-size: 4rem;
 }
 
+.result .pass,
+.result .fail {
+  margin: 8px 0;
+  font-size: 2rem;
+}
+
+.result .pass {
+  color: #167744;
+}
+
+.result .fail {
+  color: #b4232d;
+}
+
+.answer-review {
+  display: grid;
+  gap: 8px;
+  margin: 36px 0 0;
+  padding: 0;
+  text-align: left;
+  list-style: none;
+}
+
+.answer-review li {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  padding: 11px 13px;
+  background: #f7f8f6;
+  border-left: 5px solid #d8ded9;
+}
+
+.answer-review li.correct {
+  border-left-color: #167744;
+}
+
+.answer-review li.incorrect {
+  border-left-color: #b4232d;
+}
+
+.answer-review li strong {
+  flex: none;
+  color: inherit;
+  font-size: 1rem;
+}
+
 .result button {
   margin-top: 25px;
   padding: 12px 20px;
@@ -287,7 +369,22 @@ button:disabled {
 
 @media (max-width: 520px) {
   .top-row {
+    flex-direction: column;
     align-items: flex-start;
+  }
+
+  .quiz-controls {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .quiz-controls label {
+    flex: 1;
+  }
+
+  .quiz-controls select {
+    min-width: 0;
+    flex: 1;
   }
 
   .question-card {

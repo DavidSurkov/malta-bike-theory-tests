@@ -4779,7 +4779,6 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Slow down", correct: true, image: "" },
       { text: "Keep close to the car in front", correct: false, image: "" },
       { text: "Allow more time for your journey", correct: true, image: "" },
-      { text: "", correct: false, image: "" },
       { text: "Use headlights on full beam", correct: false, image: "" },
     ],
     visual: "",

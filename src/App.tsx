@@ -1,15 +1,18 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 
 import { QUESTIONS } from "./questions";
 import { isAnswerCorrect, shuffleQuestions, type QuizQuestion } from "./quiz";
 
+type QuizMode = "random" | "consecutive" | "test";
 type Result = boolean | null;
 
 type QuizState = {
+  mode: QuizMode;
   questions: QuizQuestion[];
   answers: number[][];
   results: Result[];
   questionIndex: number;
+  remainingSeconds: number;
   isHintVisible: boolean;
   isFinished: boolean;
   error: string;
@@ -17,10 +20,16 @@ type QuizState = {
 
 type QuizAction =
   | { type: "reset" }
+  | { type: "changeMode"; mode: QuizMode }
   | { type: "select"; optionIndex: number; allowsMultiple: boolean }
   | { type: "navigate"; questionIndex: number }
   | { type: "next" }
+  | { type: "tick" }
   | { type: "toggleHint" };
+
+const TEST_QUESTION_COUNT = 35;
+const TEST_DURATION_SECONDS = 45 * 60;
+const MAX_WRONG_ANSWERS = 5;
 
 const createAnswers = (count: number): number[][] =>
   Array.from({ length: count }, () => []);
@@ -28,40 +37,59 @@ const createAnswers = (count: number): number[][] =>
 const createResults = (count: number): Result[] =>
   Array.from({ length: count }, () => null);
 
-const createQuizState = (): QuizState => ({
-  questions: shuffleQuestions(QUESTIONS),
-  answers: createAnswers(QUESTIONS.length),
-  results: createResults(QUESTIONS.length),
-  questionIndex: 0,
-  isHintVisible: false,
-  isFinished: false,
-  error: "",
-});
+const getQuestions = (mode: QuizMode): QuizQuestion[] => {
+  if (mode === "consecutive") return [...QUESTIONS];
 
-const gradeCurrentQuestion = (state: QuizState): Result[] => {
-  const question = state.questions[state.questionIndex];
-  const selectedOptions = state.answers[state.questionIndex] ?? [];
-
-  if (question === undefined || selectedOptions.length === 0) {
-    return state.results;
-  }
-
-  return state.results.map((currentResult, index) =>
-    index === state.questionIndex
-      ? isAnswerCorrect(question, selectedOptions)
-      : currentResult,
-  );
+  const questions = shuffleQuestions(QUESTIONS);
+  return mode === "test" ? questions.slice(0, TEST_QUESTION_COUNT) : questions;
 };
+
+const createQuizState = (mode: QuizMode = "random"): QuizState => {
+  const questions = getQuestions(mode);
+
+  return {
+    mode,
+    questions,
+    answers: createAnswers(questions.length),
+    results: createResults(questions.length),
+    questionIndex: 0,
+    remainingSeconds: mode === "test" ? TEST_DURATION_SECONDS : 0,
+    isHintVisible: false,
+    isFinished: false,
+    error: "",
+  };
+};
+
+const gradeQuestion = (
+  state: QuizState,
+  questionIndex: number,
+): boolean => {
+  const question = state.questions[questionIndex];
+  if (question === undefined) return false;
+
+  return isAnswerCorrect(question, state.answers[questionIndex] ?? []);
+};
+
+const gradeCurrentQuestion = (state: QuizState): Result[] =>
+  state.results.map((result, index) =>
+    index === state.questionIndex ? gradeQuestion(state, index) : result,
+  );
+
+const gradeAllQuestions = (state: QuizState): Result[] =>
+  state.questions.map((_, index) => gradeQuestion(state, index));
 
 const quizReducer = (state: QuizState, action: QuizAction): QuizState => {
   switch (action.type) {
     case "reset":
-      return createQuizState();
+      return createQuizState(state.mode);
+
+    case "changeMode":
+      return createQuizState(action.mode);
 
     case "toggleHint":
       return { ...state, isHintVisible: !state.isHintVisible };
 
-    case "select":
+    case "select": {
       const selectedOptions = state.answers[state.questionIndex] ?? [];
       const selectedOptionSet = new Set(selectedOptions);
       const nextSelection = action.allowsMultiple
@@ -80,6 +108,7 @@ const quizReducer = (state: QuizState, action: QuizAction): QuizState => {
         ),
         error: "",
       };
+    }
 
     case "navigate":
       return {
@@ -90,7 +119,7 @@ const quizReducer = (state: QuizState, action: QuizAction): QuizState => {
         error: "",
       };
 
-    case "next":
+    case "next": {
       if (state.answers[state.questionIndex]?.length === 0) {
         return {
           ...state,
@@ -101,7 +130,9 @@ const quizReducer = (state: QuizState, action: QuizAction): QuizState => {
       const isLastQuestion = state.questionIndex === state.questions.length - 1;
       return {
         ...state,
-        results: gradeCurrentQuestion(state),
+        results: isLastQuestion
+          ? gradeAllQuestions(state)
+          : gradeCurrentQuestion(state),
         questionIndex: isLastQuestion
           ? state.questionIndex
           : state.questionIndex + 1,
@@ -109,9 +140,22 @@ const quizReducer = (state: QuizState, action: QuizAction): QuizState => {
         isFinished: isLastQuestion,
         error: "",
       };
+    }
+
+    case "tick":
+      if (state.mode !== "test" || state.isFinished) return state;
+      if (state.remainingSeconds <= 1) {
+        return {
+          ...state,
+          results: gradeAllQuestions(state),
+          remainingSeconds: 0,
+          isFinished: true,
+        };
+      }
+      return { ...state, remainingSeconds: state.remainingSeconds - 1 };
 
     default:
-      throw new Error("Default case shoul never happen");
+      throw new Error("Unhandled quiz action");
   }
 };
 
@@ -121,69 +165,157 @@ const getResultClass = (result: Result): string => {
   return "";
 };
 
+const formatTime = (seconds: number): string => {
+  const minutes = Math.floor(seconds / 60);
+  return `${minutes}:${String(seconds % 60).padStart(2, "0")}`;
+};
+
 export const App = () => {
-  const [state, dispatch] = useReducer(quizReducer, undefined, createQuizState);
+  const [state, dispatch] = useReducer(quizReducer, undefined, () =>
+    createQuizState(),
+  );
   const {
+    mode,
     questions,
     answers,
     results,
     questionIndex,
+    remainingSeconds,
     isHintVisible,
     isFinished,
     error,
   } = state;
+
+  useEffect(() => {
+    if (mode !== "test" || isFinished) return;
+
+    const timer = window.setInterval(() => dispatch({ type: "tick" }), 1000);
+    return () => window.clearInterval(timer);
+  }, [mode, isFinished]);
+
   const question = questions[questionIndex];
   const selectedOptions = answers[questionIndex] ?? [];
   const selectedOptionSet = new Set(selectedOptions);
-  const result = results[questionIndex] ?? null;
+  const previousResult = results[questionIndex - 1] ?? null;
 
   if (question === undefined) {
     throw new Error("Question index is out of range");
   }
 
-  const handleShuffle = () => {
-    const hasProgress = answers.some((answer) => answer.length > 0);
-    if (!hasProgress || window.confirm("Shuffle and restart the test?")) {
-      dispatch({ type: "reset" });
+  const hasProgress = answers.some((answer) => answer.length > 0);
+  const confirmRestart = (message: string): boolean =>
+    !hasProgress || isFinished || window.confirm(message);
+
+  const handleRestart = () => {
+    if (confirmRestart("Restart this quiz?")) dispatch({ type: "reset" });
+  };
+
+  const handleModeChange = (nextMode: QuizMode) => {
+    if (nextMode === mode) return;
+    if (confirmRestart("Change mode and restart the quiz?")) {
+      dispatch({ type: "changeMode", mode: nextMode });
     }
   };
 
-  const score = results.filter((answerResult) => answerResult === true).length;
-  const progress = isFinished ? 100 : (questionIndex / questions.length) * 100;
+  const score = results.filter((result) => result === true).length;
+  const wrongAnswers = questions.length - score;
+  const passed = wrongAnswers <= MAX_WRONG_ANSWERS;
+  const progress = isFinished
+    ? 100
+    : ((questionIndex + 1) / questions.length) * 100;
   const correctOptions = question.options.filter((option) => option.correct);
   const allowsMultiple = correctOptions.length > 1;
+  const showFeedback = mode !== "test";
 
   return (
     <main className="app">
       <header className="top">
         <div className="top-row">
           <h1>Malta Motorcycle Theory Test</h1>
-          <button className="shuffle" type="button" onClick={handleShuffle}>
-            Shuffle questions
-          </button>
+          <div className="quiz-controls">
+            <label>
+              <span>Mode</span>
+              <select
+                value={mode}
+                onChange={(event) =>
+                  handleModeChange(event.target.value as QuizMode)
+                }
+              >
+                <option value="random">Random practice</option>
+                <option value="consecutive">Consecutive practice</option>
+                <option value="test">Timed test</option>
+              </select>
+            </label>
+            <button className="shuffle" type="button" onClick={handleRestart}>
+              Restart
+            </button>
+          </div>
+        </div>
+        <div className="progress" aria-hidden="true">
+          <span style={{ width: `${progress}%` }} />
         </div>
       </header>
 
       <section className="content">
         {isFinished ? (
           <div className="result">
-            <p>Test complete</p>
+            <p>{mode === "test" ? "Test complete" : "Practice complete"}</p>
+            {mode === "test" && (
+              <h2 className={passed ? "pass" : "fail"}>
+                {passed ? "Passed" : "Not passed"}
+              </h2>
+            )}
             <strong>
               {score} / {questions.length}
             </strong>
-            <p>{Math.round((score / questions.length) * 100)}% correct</p>
+            <p>
+              {wrongAnswers} wrong · {Math.round((score / questions.length) * 100)}%
+              correct
+            </p>
+            {mode === "test" && (
+              <p>You can make up to {MAX_WRONG_ANSWERS} mistakes to pass.</p>
+            )}
             <button type="button" onClick={() => dispatch({ type: "reset" })}>
-              Shuffle and try again
+              Try again
             </button>
+            {mode === "test" && (
+              <ol className="answer-review">
+                {questions.map((reviewQuestion, index) => (
+                  <li
+                    key={reviewQuestion.id}
+                    className={getResultClass(results[index] ?? false)}
+                  >
+                    <span>{reviewQuestion.prompt}</span>
+                    <strong>
+                      {results[index] ? "Correct" : "Wrong"}
+                    </strong>
+                  </li>
+                ))}
+              </ol>
+            )}
           </div>
         ) : (
           <>
-            <div className="meta">
-              <span className="tag">{question.code}</span>
-              <span className="tag">{question.category}</span>
+            <div className="question-heading">
+              <div className="meta">
+                <span className="tag">{question.code}</span>
+                <span className="tag">{question.category}</span>
+              </div>
+              <span>
+                Question {questionIndex + 1} of {questions.length}
+              </span>
+              {mode === "test" && (
+                <time className="timer" aria-label="Time remaining">
+                  {formatTime(remainingSeconds)}
+                </time>
+              )}
             </div>
 
-            <article className={`question-card ${getResultClass(result)}`}>
+            <article
+              className={`question-card previous-${
+                showFeedback ? getResultClass(previousResult) : ""
+              }`}
+            >
               <h2>{question.prompt}</h2>
               {question.visual && (
                 <img
@@ -232,7 +364,7 @@ export const App = () => {
                 </p>
               )}
 
-              {isHintVisible && (
+              {showFeedback && isHintVisible && (
                 <div className="hint">
                   <strong>
                     Correct answer{correctOptions.length > 1 ? "s" : ""}:
@@ -243,26 +375,30 @@ export const App = () => {
             </article>
 
             <div className="actions">
-              <button
-                className="secondary"
-                type="button"
-                disabled={questionIndex === 0}
-                onClick={() =>
-                  dispatch({
-                    type: "navigate",
-                    questionIndex: questionIndex - 1,
-                  })
-                }
-              >
-                Previous
-              </button>
-              <button
-                className="secondary"
-                type="button"
-                onClick={() => dispatch({ type: "toggleHint" })}
-              >
-                {isHintVisible ? "Hide hint" : "Show hint"}
-              </button>
+              {showFeedback && (
+                <>
+                  <button
+                    className="secondary"
+                    type="button"
+                    disabled={questionIndex === 0}
+                    onClick={() =>
+                      dispatch({
+                        type: "navigate",
+                        questionIndex: questionIndex - 1,
+                      })
+                    }
+                  >
+                    Previous
+                  </button>
+                  <button
+                    className="secondary"
+                    type="button"
+                    onClick={() => dispatch({ type: "toggleHint" })}
+                  >
+                    {isHintVisible ? "Hide hint" : "Show hint"}
+                  </button>
+                </>
+              )}
               <button
                 className="primary"
                 type="button"
@@ -274,32 +410,34 @@ export const App = () => {
               </button>
             </div>
 
-            <details className="status">
-              <summary>Question status</summary>
-              <nav className="question-nav" aria-label="Questions">
-                {questions.map((navQuestion, navIndex) => (
-                  <button
-                    type="button"
-                    key={navQuestion.id}
-                    className={`${
-                      navIndex === questionIndex ? "current " : ""
-                    }${getResultClass(results[navIndex] ?? null)}`}
-                    aria-label={`Question ${navIndex + 1}`}
-                    aria-current={
-                      navIndex === questionIndex ? "step" : undefined
-                    }
-                    onClick={() =>
-                      dispatch({
-                        type: "navigate",
-                        questionIndex: navIndex,
-                      })
-                    }
-                  >
-                    {navIndex + 1}
-                  </button>
-                ))}
-              </nav>
-            </details>
+            {showFeedback && (
+              <details className="status">
+                <summary>Question status</summary>
+                <nav className="question-nav" aria-label="Questions">
+                  {questions.map((navQuestion, navIndex) => (
+                    <button
+                      type="button"
+                      key={navQuestion.id}
+                      className={`${
+                        navIndex === questionIndex ? "current " : ""
+                      }${getResultClass(results[navIndex] ?? null)}`}
+                      aria-label={`Question ${navIndex + 1}`}
+                      aria-current={
+                        navIndex === questionIndex ? "step" : undefined
+                      }
+                      onClick={() =>
+                        dispatch({
+                          type: "navigate",
+                          questionIndex: navIndex,
+                        })
+                      }
+                    >
+                      {navIndex + 1}
+                    </button>
+                  ))}
+                </nav>
+              </details>
+            )}
           </>
         )}
       </section>
