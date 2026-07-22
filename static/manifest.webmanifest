@@ -1,7 +1,7 @@
 {
-  "name": "Malta Motorcycle Theory Test",
+  "name": "Malta Driving Theory Test",
   "short_name": "Theory Test",
-  "description": "Practice the Malta motorcycle theory test online or offline.",
+  "description": "Practice Malta car and motorcycle theory tests online or offline.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

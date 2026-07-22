@@ -1,6 +1,6 @@
-import type { QuizQuestion } from "./quiz";
+import type { QuizQuestion } from "../quiz";
 
-export const QUESTIONS: QuizQuestion[] = [
+export const BIKE_QUESTIONS: QuizQuestion[] = [
   {
     id: "7125",
     code: "BIKEH1.1",
@@ -121,7 +121,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Overtake", correct: true, image: "" },
       { text: "Slow down", correct: false, image: "" },
     ],
-    visual: "/assetes/7131-visual.png",
+    visual: "/assetes/bikes/7131-visual.png",
   },
   {
     id: "7132",
@@ -146,7 +146,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       { text: "Drivers to use the hard shoulder", correct: false, image: "" },
     ],
-    visual: "/assetes/7132-visual.png",
+    visual: "/assetes/bikes/7132-visual.png",
   },
   {
     id: "7133",
@@ -595,7 +595,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "National speed limit", correct: false, image: "" },
       { text: "School crossing patrol", correct: false, image: "" },
     ],
-    visual: "/assetes/7156-visual.png",
+    visual: "/assetes/bikes/7156-visual.png",
   },
   {
     id: "7157",
@@ -652,7 +652,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "No waiting on the carriageway", correct: false, image: "" },
       { text: "A 60 km/h speed limit applies", correct: false, image: "" },
     ],
-    visual: "/assetes/7160-visual.png",
+    visual: "/assetes/bikes/7160-visual.png",
   },
   {
     id: "7161",
@@ -1203,7 +1203,7 @@ export const QUESTIONS: QuizQuestion[] = [
         image: "",
       },
     ],
-    visual: "/assetes/7186-visual.png",
+    visual: "/assetes/bikes/7186-visual.png",
   },
   {
     id: "7187",
@@ -1292,7 +1292,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "You have priority", correct: false, image: "" },
       { text: "No overtaking", correct: true, image: "" },
     ],
-    visual: "/assetes/7193-visual.png",
+    visual: "/assetes/bikes/7193-visual.png",
   },
   {
     id: "7194",
@@ -1305,7 +1305,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Give way to oncoming traffic", correct: false, image: "" },
       { text: "Keep in one lane", correct: false, image: "" },
     ],
-    visual: "/assetes/7194-visual.png",
+    visual: "/assetes/bikes/7194-visual.png",
   },
   {
     id: "7195",
@@ -1318,7 +1318,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "National speed limit applies", correct: false, image: "" },
       { text: "Waiting permitted", correct: false, image: "" },
     ],
-    visual: "/assetes/7195-visual.png",
+    visual: "/assetes/bikes/7195-visual.png",
   },
   {
     id: "7196",
@@ -1326,10 +1326,10 @@ export const QUESTIONS: QuizQuestion[] = [
     category: "ROAD AND TRAFFIC SIGNS",
     prompt: "Which sign means 'no stopping'?",
     options: [
-      { text: "Sign A", correct: false, image: "/assetes/7196-option-1.png" },
-      { text: "Sign B", correct: true, image: "/assetes/7196-option-2.png" },
-      { text: "Sign C", correct: false, image: "/assetes/7196-option-3.png" },
-      { text: "Sign D", correct: false, image: "/assetes/7196-option-4.png" },
+      { text: "Sign A", correct: false, image: "/assetes/bikes/7196-option-1.png" },
+      { text: "Sign B", correct: true, image: "/assetes/bikes/7196-option-2.png" },
+      { text: "Sign C", correct: false, image: "/assetes/bikes/7196-option-3.png" },
+      { text: "Sign D", correct: false, image: "/assetes/bikes/7196-option-4.png" },
     ],
     visual: "",
   },
@@ -1344,7 +1344,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Crossroads", correct: false, image: "" },
       { text: "Roundabout", correct: false, image: "" },
     ],
-    visual: "/assetes/7197-visual.png",
+    visual: "/assetes/bikes/7197-visual.png",
   },
   {
     id: "7198",
@@ -1357,7 +1357,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Waiting restrictions apply", correct: false, image: "" },
       { text: "National speed limit applies", correct: false, image: "" },
     ],
-    visual: "/assetes/7198-visual.png",
+    visual: "/assetes/bikes/7198-visual.png",
   },
   {
     id: "7199",
@@ -1370,7 +1370,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Two way traffic", correct: false, image: "" },
       { text: "No overtaking allowed", correct: false, image: "" },
     ],
-    visual: "/assetes/7199-visual.png",
+    visual: "/assetes/bikes/7199-visual.png",
   },
   {
     id: "7200",
@@ -1391,7 +1391,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       { text: "End of two-way road", correct: false, image: "" },
     ],
-    visual: "/assetes/7200-visual.png",
+    visual: "/assetes/bikes/7200-visual.png",
   },
   {
     id: "7201",
@@ -1412,10 +1412,10 @@ export const QUESTIONS: QuizQuestion[] = [
     category: "ROAD AND TRAFFIC SIGNS",
     prompt: "Which sign warns you that a Zebra crossing is on the approach?",
     options: [
-      { text: "Sign A", correct: true, image: "/assetes/7202-option-1.png" },
-      { text: "Sign B", correct: false, image: "/assetes/7202-option-2.png" },
-      { text: "Sign C", correct: false, image: "/assetes/7202-option-3.png" },
-      { text: "Sign D", correct: false, image: "/assetes/7202-option-4.png" },
+      { text: "Sign A", correct: true, image: "/assetes/bikes/7202-option-1.png" },
+      { text: "Sign B", correct: false, image: "/assetes/bikes/7202-option-2.png" },
+      { text: "Sign C", correct: false, image: "/assetes/bikes/7202-option-3.png" },
+      { text: "Sign D", correct: false, image: "/assetes/bikes/7202-option-4.png" },
     ],
     visual: "",
   },
@@ -1442,7 +1442,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       { text: "Stop even if the road is clear", correct: true, image: "" },
     ],
-    visual: "/assetes/7203-visual.png",
+    visual: "/assetes/bikes/7203-visual.png",
   },
   {
     id: "7204",
@@ -1455,7 +1455,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "One-way street", correct: false, image: "" },
       { text: "Overtaking is permissible", correct: false, image: "" },
     ],
-    visual: "/assetes/7204-visual.png",
+    visual: "/assetes/bikes/7204-visual.png",
   },
   {
     id: "7205",
@@ -1519,7 +1519,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       { text: "Give way to oncoming vehicles", correct: false, image: "" },
     ],
-    visual: "/assetes/7208-visual.png",
+    visual: "/assetes/bikes/7208-visual.png",
   },
   {
     id: "7209",
@@ -1532,7 +1532,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Give warning of a motorway ahead", correct: false, image: "" },
       { text: "Give an instruction", correct: true, image: "" },
     ],
-    visual: "/assetes/7209-visual.png",
+    visual: "/assetes/bikes/7209-visual.png",
   },
   {
     id: "7210",
@@ -1541,10 +1541,10 @@ export const QUESTIONS: QuizQuestion[] = [
     prompt:
       "Which of these signs means that you are entering a one-way street?",
     options: [
-      { text: "Sign A", correct: true, image: "/assetes/7210-option-1.png" },
-      { text: "Sign B", correct: false, image: "/assetes/7210-option-2.png" },
-      { text: "Sign C", correct: false, image: "/assetes/7210-option-3.png" },
-      { text: "Sign D", correct: false, image: "/assetes/7210-option-4.png" },
+      { text: "Sign A", correct: true, image: "/assetes/bikes/7210-option-1.png" },
+      { text: "Sign B", correct: false, image: "/assetes/bikes/7210-option-2.png" },
+      { text: "Sign C", correct: false, image: "/assetes/bikes/7210-option-3.png" },
+      { text: "Sign D", correct: false, image: "/assetes/bikes/7210-option-4.png" },
     ],
     visual: "",
   },
@@ -1559,7 +1559,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "To give order", correct: false, image: "" },
       { text: "To give information", correct: false, image: "" },
     ],
-    visual: "/assetes/7213-visual.png",
+    visual: "/assetes/bikes/7213-visual.png",
   },
   {
     id: "7214",
@@ -1572,7 +1572,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "No through road", correct: false, image: "" },
       { text: "Turn left ahead", correct: false, image: "" },
     ],
-    visual: "/assetes/7214-visual.png",
+    visual: "/assetes/bikes/7214-visual.png",
   },
   {
     id: "7215",
@@ -1585,7 +1585,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Level crossing without gate", correct: false, image: "" },
       { text: "Level crossing with a gate", correct: false, image: "" },
     ],
-    visual: "/assetes/7215-visual.png",
+    visual: "/assetes/bikes/7215-visual.png",
   },
   {
     id: "7216",
@@ -1598,7 +1598,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "No vehicles", correct: false, image: "" },
       { text: "Roundabout", correct: true, image: "" },
     ],
-    visual: "/assetes/7216-visual.png",
+    visual: "/assetes/bikes/7216-visual.png",
   },
   {
     id: "7217",
@@ -1621,10 +1621,10 @@ export const QUESTIONS: QuizQuestion[] = [
     category: "ROAD AND TRAFFIC SIGNS",
     prompt: "Which of these signs warn you of a pedestrian crossing?",
     options: [
-      { text: "Sign A", correct: false, image: "/assetes/7219-option-1.png" },
-      { text: "Sign B", correct: false, image: "/assetes/7219-option-2.png" },
-      { text: "Sign C", correct: true, image: "/assetes/7219-option-3.png" },
-      { text: "Sign D", correct: false, image: "/assetes/7219-option-4.png" },
+      { text: "Sign A", correct: false, image: "/assetes/bikes/7219-option-1.png" },
+      { text: "Sign B", correct: false, image: "/assetes/bikes/7219-option-2.png" },
+      { text: "Sign C", correct: true, image: "/assetes/bikes/7219-option-3.png" },
+      { text: "Sign D", correct: false, image: "/assetes/bikes/7219-option-4.png" },
     ],
     visual: "",
   },
@@ -1639,7 +1639,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Pedestrian crossing ahead", correct: true, image: "" },
       { text: "School crossing ahead", correct: false, image: "" },
     ],
-    visual: "/assetes/7220-visual.png",
+    visual: "/assetes/bikes/7220-visual.png",
   },
   {
     id: "7223",
@@ -1664,7 +1664,7 @@ export const QUESTIONS: QuizQuestion[] = [
         image: "",
       },
     ],
-    visual: "/assetes/7223-visual.png",
+    visual: "/assetes/bikes/7223-visual.png",
   },
   {
     id: "7224",
@@ -1677,7 +1677,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Entrance to tunnel", correct: false, image: "" },
       { text: "Soft verges", correct: false, image: "" },
     ],
-    visual: "/assetes/7224-visual.png",
+    visual: "/assetes/bikes/7224-visual.png",
   },
   {
     id: "7225",
@@ -1690,7 +1690,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Ancient monument ahead", correct: false, image: "" },
       { text: "Low bridge ahead", correct: false, image: "" },
     ],
-    visual: "/assetes/7225-visual.png",
+    visual: "/assetes/bikes/7225-visual.png",
   },
   {
     id: "7226",
@@ -1699,10 +1699,10 @@ export const QUESTIONS: QuizQuestion[] = [
     prompt:
       "Which of these signs means that the road will narrow on both sides?",
     options: [
-      { text: "Sign A", correct: true, image: "/assetes/7226-option-1.png" },
-      { text: "Sign B", correct: false, image: "/assetes/7226-option-2.png" },
-      { text: "Sign C", correct: false, image: "/assetes/7226-option-3.png" },
-      { text: "Sign D", correct: false, image: "/assetes/7226-option-4.png" },
+      { text: "Sign A", correct: true, image: "/assetes/bikes/7226-option-1.png" },
+      { text: "Sign B", correct: false, image: "/assetes/bikes/7226-option-2.png" },
+      { text: "Sign C", correct: false, image: "/assetes/bikes/7226-option-3.png" },
+      { text: "Sign D", correct: false, image: "/assetes/bikes/7226-option-4.png" },
     ],
     visual: "",
   },
@@ -1717,7 +1717,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "No through road (Dead end)", correct: true, image: "" },
       { text: "T-junction", correct: false, image: "" },
     ],
-    visual: "/assetes/7227-visual.png",
+    visual: "/assetes/bikes/7227-visual.png",
   },
   {
     id: "7228",
@@ -1738,7 +1738,7 @@ export const QUESTIONS: QuizQuestion[] = [
         image: "",
       },
     ],
-    visual: "/assetes/7228-visual.png",
+    visual: "/assetes/bikes/7228-visual.png",
   },
   {
     id: "7229",
@@ -1751,7 +1751,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Tyres liable to punctures ahead", correct: false, image: "" },
       { text: "Slippery road ahead", correct: false, image: "" },
     ],
-    visual: "/assetes/7229-visual.png",
+    visual: "/assetes/bikes/7229-visual.png",
   },
   {
     id: "7230",
@@ -1773,7 +1773,7 @@ export const QUESTIONS: QuizQuestion[] = [
         image: "",
       },
     ],
-    visual: "/assetes/7230-visual.png",
+    visual: "/assetes/bikes/7230-visual.png",
   },
   {
     id: "7231",
@@ -1786,7 +1786,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Uneven road", correct: false, image: "" },
       { text: "Camber in the road", correct: false, image: "" },
     ],
-    visual: "/assetes/7231-visual.png",
+    visual: "/assetes/bikes/7231-visual.png",
   },
   {
     id: "7232",
@@ -1799,7 +1799,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Slippery road", correct: false, image: "" },
       { text: "Steep hill downwards", correct: false, image: "" },
     ],
-    visual: "/assetes/7232-visual.png",
+    visual: "/assetes/bikes/7232-visual.png",
   },
   {
     id: "7233",
@@ -1812,7 +1812,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "No entry for traffic turning left", correct: false, image: "" },
       { text: "Turn left for parking area", correct: false, image: "" },
     ],
-    visual: "/assetes/7233-visual.png",
+    visual: "/assetes/bikes/7233-visual.png",
   },
   {
     id: "7234",
@@ -1820,10 +1820,10 @@ export const QUESTIONS: QuizQuestion[] = [
     category: "ROAD AND TRAFFIC SIGNS",
     prompt: "Which sign means no vehicles are allowed?",
     options: [
-      { text: "Sign A", correct: false, image: "/assetes/7234-option-1.png" },
-      { text: "Sign B", correct: true, image: "/assetes/7234-option-2.png" },
-      { text: "Sign C", correct: false, image: "/assetes/7234-option-3.png" },
-      { text: "Sign D", correct: false, image: "/assetes/7234-option-4.png" },
+      { text: "Sign A", correct: false, image: "/assetes/bikes/7234-option-1.png" },
+      { text: "Sign B", correct: true, image: "/assetes/bikes/7234-option-2.png" },
+      { text: "Sign C", correct: false, image: "/assetes/bikes/7234-option-3.png" },
+      { text: "Sign D", correct: false, image: "/assetes/bikes/7234-option-4.png" },
     ],
     visual: "",
   },
@@ -1838,7 +1838,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "T-junction", correct: false, image: "" },
       { text: "No through road", correct: true, image: "" },
     ],
-    visual: "/assetes/7235-visual.png",
+    visual: "/assetes/bikes/7235-visual.png",
   },
   {
     id: "7236",
@@ -1846,10 +1846,10 @@ export const QUESTIONS: QuizQuestion[] = [
     category: "ROAD AND TRAFFIC SIGNS",
     prompt: "Which sign means 'no through road'?",
     options: [
-      { text: "Sign A", correct: false, image: "/assetes/7236-option-1.png" },
-      { text: "Sign B", correct: false, image: "/assetes/7236-option-2.png" },
-      { text: "Sign C", correct: true, image: "/assetes/7236-option-3.png" },
-      { text: "Sign D", correct: false, image: "/assetes/7236-option-4.png" },
+      { text: "Sign A", correct: false, image: "/assetes/bikes/7236-option-1.png" },
+      { text: "Sign B", correct: false, image: "/assetes/bikes/7236-option-2.png" },
+      { text: "Sign C", correct: true, image: "/assetes/bikes/7236-option-3.png" },
+      { text: "Sign D", correct: false, image: "/assetes/bikes/7236-option-4.png" },
     ],
     visual: "",
   },
@@ -1864,7 +1864,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "No overtaking", correct: false, image: "" },
       { text: "Light vehicles only", correct: false, image: "" },
     ],
-    visual: "/assetes/7237-visual.png",
+    visual: "/assetes/bikes/7237-visual.png",
   },
   {
     id: "7238",
@@ -1881,7 +1881,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Right hand lane for turning right", correct: false, image: "" },
       { text: "The right-hand lane ahead is closed", correct: true, image: "" },
     ],
-    visual: "/assetes/7238-visual.png",
+    visual: "/assetes/bikes/7238-visual.png",
   },
   {
     id: "7239",
@@ -1895,7 +1895,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Green and amber together", correct: false, image: "" },
       { text: "Green alone", correct: false, image: "" },
     ],
-    visual: "/assetes/7239-visual.png",
+    visual: "/assetes/bikes/7239-visual.png",
   },
   {
     id: "7240",
@@ -1909,7 +1909,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Amber then green", correct: false, image: "" },
       { text: "Green then amber", correct: false, image: "" },
     ],
-    visual: "/assetes/7240-visual.png",
+    visual: "/assetes/bikes/7240-visual.png",
   },
   {
     id: "7241",
@@ -1934,7 +1934,7 @@ export const QUESTIONS: QuizQuestion[] = [
         image: "",
       },
     ],
-    visual: "/assetes/7241-visual.png",
+    visual: "/assetes/bikes/7241-visual.png",
   },
   {
     id: "7242",
@@ -1951,7 +1951,7 @@ export const QUESTIONS: QuizQuestion[] = [
         image: "",
       },
     ],
-    visual: "/assetes/7242-visual.png",
+    visual: "/assetes/bikes/7242-visual.png",
   },
   {
     id: "7243",
@@ -1980,7 +1980,7 @@ export const QUESTIONS: QuizQuestion[] = [
         image: "",
       },
     ],
-    visual: "/assetes/7243-visual.png",
+    visual: "/assetes/bikes/7243-visual.png",
   },
   {
     id: "7244",
@@ -2018,10 +2018,10 @@ export const QUESTIONS: QuizQuestion[] = [
     category: "ROAD AND TRAFFIC SIGNS",
     prompt: "Which of these signs means no powered vehicles?",
     options: [
-      { text: "Sign A", correct: false, image: "/assetes/7245-option-1.png" },
-      { text: "Sign B", correct: true, image: "/assetes/7245-option-2.png" },
-      { text: "Sign C", correct: false, image: "/assetes/7245-option-3.png" },
-      { text: "Sign D", correct: false, image: "/assetes/7245-option-4.png" },
+      { text: "Sign A", correct: false, image: "/assetes/bikes/7245-option-1.png" },
+      { text: "Sign B", correct: true, image: "/assetes/bikes/7245-option-2.png" },
+      { text: "Sign C", correct: false, image: "/assetes/bikes/7245-option-3.png" },
+      { text: "Sign D", correct: false, image: "/assetes/bikes/7245-option-4.png" },
     ],
     visual: "",
   },
@@ -2066,7 +2066,7 @@ export const QUESTIONS: QuizQuestion[] = [
         image: "",
       },
     ],
-    visual: "/assetes/7247-visual.png",
+    visual: "/assetes/bikes/7247-visual.png",
   },
   {
     id: "7248",
@@ -2079,7 +2079,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Stop sign", correct: false, image: "" },
       { text: "No through road sign", correct: false, image: "" },
     ],
-    visual: "/assetes/7248-visual.png",
+    visual: "/assetes/bikes/7248-visual.png",
   },
   {
     id: "7249",
@@ -2097,7 +2097,7 @@ export const QUESTIONS: QuizQuestion[] = [
         image: "",
       },
     ],
-    visual: "/assetes/7249-visual.png",
+    visual: "/assetes/bikes/7249-visual.png",
   },
   {
     id: "7250",
@@ -2111,7 +2111,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "The driver wishes to overtake", correct: false, image: "" },
       { text: "The driver is slowing down", correct: false, image: "" },
     ],
-    visual: "/assetes/7250-visual.png",
+    visual: "/assetes/bikes/7250-visual.png",
   },
   {
     id: "7251",
@@ -2125,7 +2125,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Turn to the left", correct: false, image: "" },
       { text: "Turn to the right", correct: false, image: "" },
     ],
-    visual: "/assetes/7251-visual.png",
+    visual: "/assetes/bikes/7251-visual.png",
   },
   {
     id: "7252",
@@ -2217,7 +2217,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "NEW speed limit 30 kph", correct: true, image: "" },
       { text: "End of 30kph zone", correct: false, image: "" },
     ],
-    visual: "/assetes/7256-visual.png",
+    visual: "/assetes/bikes/7256-visual.png",
   },
   {
     id: "7257",
@@ -2247,10 +2247,10 @@ export const QUESTIONS: QuizQuestion[] = [
     category: "ROAD AND TRAFFIC SIGNS",
     prompt: "Which of these signs means that the national speed limit applies?",
     options: [
-      { text: "Sign A", correct: false, image: "/assetes/7258-option-1.png" },
-      { text: "Sign B", correct: false, image: "/assetes/7258-option-2.png" },
-      { text: "Sign C", correct: true, image: "/assetes/7258-option-3.png" },
-      { text: "Sign D", correct: false, image: "/assetes/7258-option-4.png" },
+      { text: "Sign A", correct: false, image: "/assetes/bikes/7258-option-1.png" },
+      { text: "Sign B", correct: false, image: "/assetes/bikes/7258-option-2.png" },
+      { text: "Sign C", correct: true, image: "/assetes/bikes/7258-option-3.png" },
+      { text: "Sign D", correct: false, image: "/assetes/bikes/7258-option-4.png" },
     ],
     visual: "",
   },
@@ -2281,7 +2281,7 @@ export const QUESTIONS: QuizQuestion[] = [
         image: "",
       },
     ],
-    visual: "/assetes/7259-visual.png",
+    visual: "/assetes/bikes/7259-visual.png",
   },
   {
     id: "7260",
@@ -2324,7 +2324,7 @@ export const QUESTIONS: QuizQuestion[] = [
         image: "",
       },
     ],
-    visual: "/assetes/7261-visual.png",
+    visual: "/assetes/bikes/7261-visual.png",
   },
   {
     id: "7262",
@@ -2345,7 +2345,7 @@ export const QUESTIONS: QuizQuestion[] = [
         image: "",
       },
     ],
-    visual: "/assetes/7262-visual.png",
+    visual: "/assetes/bikes/7262-visual.png",
   },
   {
     id: "7263",
@@ -2358,7 +2358,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "No parking", correct: false, image: "" },
       { text: "No entry", correct: true, image: "" },
     ],
-    visual: "/assetes/7263-visual.png",
+    visual: "/assetes/bikes/7263-visual.png",
   },
   {
     id: "7264",
@@ -3305,7 +3305,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       { text: "Your view ahead is reduced", correct: true, image: "" },
     ],
-    visual: "/assetes/7302-visual.png",
+    visual: "/assetes/bikes/7302-visual.png",
   },
   {
     id: "7303",
@@ -3335,7 +3335,7 @@ export const QUESTIONS: QuizQuestion[] = [
         image: "",
       },
     ],
-    visual: "/assetes/7303-visual.png",
+    visual: "/assetes/bikes/7303-visual.png",
   },
   {
     id: "7304",
@@ -3389,7 +3389,7 @@ export const QUESTIONS: QuizQuestion[] = [
         image: "",
       },
     ],
-    visual: "/assetes/7306-visual.png",
+    visual: "/assetes/bikes/7306-visual.png",
   },
   {
     id: "7307",
@@ -3620,7 +3620,7 @@ export const QUESTIONS: QuizQuestion[] = [
         image: "",
       },
     ],
-    visual: "/assetes/7319-visual.png",
+    visual: "/assetes/bikes/7319-visual.png",
   },
   {
     id: "7320",
@@ -4659,7 +4659,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "To improve your view of the road", correct: true, image: "" },
       { text: "To avoid manhole covers", correct: false, image: "" },
     ],
-    visual: "/assetes/7380-visual.png",
+    visual: "/assetes/bikes/7380-visual.png",
   },
   {
     id: "7381",
@@ -4837,7 +4837,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Go uphill", correct: false, image: "" },
       { text: "Bend sharply to the left", correct: true, image: "" },
     ],
-    visual: "/assetes/7390-visual.png",
+    visual: "/assetes/bikes/7390-visual.png",
   },
   {
     id: "7391",
@@ -5071,7 +5071,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "When turning right only", correct: false, image: "" },
       { text: "At all times", correct: true, image: "" },
     ],
-    visual: "/assetes/7401-visual.png",
+    visual: "/assetes/bikes/7401-visual.png",
   },
   {
     id: "7402",
@@ -5502,7 +5502,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "The ice cream van may move off", correct: false, image: "" },
       { text: "The child may run out into the road", correct: true, image: "" },
     ],
-    visual: "/assetes/7426-visual.png",
+    visual: "/assetes/bikes/7426-visual.png",
   },
   {
     id: "7427",
@@ -5579,10 +5579,10 @@ export const QUESTIONS: QuizQuestion[] = [
     category: "VULNERABLE ROAD USERS",
     prompt: "Which sign means that there may be people walking along the road?",
     options: [
-      { text: "Sign A", correct: true, image: "/assetes/7430-option-1.png" },
-      { text: "Sign B", correct: false, image: "/assetes/7430-option-2.png" },
-      { text: "Sign C", correct: false, image: "/assetes/7430-option-3.png" },
-      { text: "Sign D", correct: false, image: "/assetes/7430-option-4.png" },
+      { text: "Sign A", correct: true, image: "/assetes/bikes/7430-option-1.png" },
+      { text: "Sign B", correct: false, image: "/assetes/bikes/7430-option-2.png" },
+      { text: "Sign C", correct: false, image: "/assetes/bikes/7430-option-3.png" },
+      { text: "Sign D", correct: false, image: "/assetes/bikes/7430-option-4.png" },
     ],
     visual: "",
   },
@@ -5593,10 +5593,10 @@ export const QUESTIONS: QuizQuestion[] = [
     prompt:
       "Which sign tells you that pedestrians may be walking in the road as there is no pavement?",
     options: [
-      { text: "Sign A", correct: false, image: "/assetes/7431-option-1.png" },
-      { text: "Sign B", correct: true, image: "/assetes/7431-option-2.png" },
-      { text: "Sign C", correct: false, image: "/assetes/7431-option-3.png" },
-      { text: "Sign D", correct: false, image: "/assetes/7431-option-4.png" },
+      { text: "Sign A", correct: false, image: "/assetes/bikes/7431-option-1.png" },
+      { text: "Sign B", correct: true, image: "/assetes/bikes/7431-option-2.png" },
+      { text: "Sign C", correct: false, image: "/assetes/bikes/7431-option-3.png" },
+      { text: "Sign D", correct: false, image: "/assetes/bikes/7431-option-4.png" },
     ],
     visual: "",
   },
@@ -5607,10 +5607,10 @@ export const QUESTIONS: QuizQuestion[] = [
     prompt:
       "Which sign means there may be elderly pedestrians likely to cross the road?",
     options: [
-      { text: "Sign A", correct: true, image: "/assetes/7432-option-1.png" },
-      { text: "Sign B", correct: false, image: "/assetes/7432-option-2.png" },
-      { text: "Sign C", correct: false, image: "/assetes/7432-option-3.png" },
-      { text: "Sign D", correct: false, image: "/assetes/7432-option-4.png" },
+      { text: "Sign A", correct: true, image: "/assetes/bikes/7432-option-1.png" },
+      { text: "Sign B", correct: false, image: "/assetes/bikes/7432-option-2.png" },
+      { text: "Sign C", correct: false, image: "/assetes/bikes/7432-option-3.png" },
+      { text: "Sign D", correct: false, image: "/assetes/bikes/7432-option-4.png" },
     ],
     visual: "",
   },
@@ -7040,12 +7040,12 @@ export const QUESTIONS: QuizQuestion[] = [
     category: "VEHICLE HANDLING",
     prompt: "Which of these plates may appear with this road sign?",
     options: [
-      { text: "Sign A", correct: true, image: "/assetes/7511-option-1.png" },
-      { text: "Sign B", correct: false, image: "/assetes/7511-option-2.png" },
-      { text: "Sign C", correct: false, image: "/assetes/7511-option-3.png" },
-      { text: "Sign D", correct: false, image: "/assetes/7511-option-4.png" },
+      { text: "Sign A", correct: true, image: "/assetes/bikes/7511-option-1.png" },
+      { text: "Sign B", correct: false, image: "/assetes/bikes/7511-option-2.png" },
+      { text: "Sign C", correct: false, image: "/assetes/bikes/7511-option-3.png" },
+      { text: "Sign D", correct: false, image: "/assetes/bikes/7511-option-4.png" },
     ],
-    visual: "/assetes/7511-visual.png",
+    visual: "/assetes/bikes/7511-visual.png",
   },
   {
     id: "7512",
@@ -7090,7 +7090,7 @@ export const QUESTIONS: QuizQuestion[] = [
       { text: "Accelerate to pass the junction", correct: false, image: "" },
       { text: "Stop and give way to the vehicle", correct: false, image: "" },
     ],
-    visual: "/assetes/7514-visual.png",
+    visual: "/assetes/bikes/7514-visual.png",
   },
   {
     id: "7515",

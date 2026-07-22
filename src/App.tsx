@@ -1,12 +1,15 @@
 import { useEffect, useReducer } from "react";
 
-import { QUESTIONS } from "./questions";
+import { BIKE_QUESTIONS } from "./questions/bike";
+import { CAR_QUESTIONS } from "./questions/cars";
 import { isAnswerCorrect, shuffleQuestions, type QuizQuestion } from "./quiz";
 
+type VehicleType = "bike" | "car";
 type QuizMode = "random" | "consecutive" | "test";
 type Result = boolean | null;
 
 type QuizState = {
+  vehicleType: VehicleType;
   mode: QuizMode;
   questions: QuizQuestion[];
   answers: number[][];
@@ -20,6 +23,7 @@ type QuizState = {
 
 type QuizAction =
   | { type: "reset" }
+  | { type: "changeVehicle"; vehicleType: VehicleType }
   | { type: "changeMode"; mode: QuizMode }
   | { type: "select"; optionIndex: number; allowsMultiple: boolean }
   | { type: "navigate"; questionIndex: number }
@@ -37,17 +41,26 @@ const createAnswers = (count: number): number[][] =>
 const createResults = (count: number): Result[] =>
   Array.from({ length: count }, () => null);
 
-const getQuestions = (mode: QuizMode): QuizQuestion[] => {
-  if (mode === "consecutive") return [...QUESTIONS];
+const getQuestions = (
+  mode: QuizMode,
+  vehicleType: VehicleType,
+): QuizQuestion[] => {
+  const sourceQuestions =
+    vehicleType === "bike" ? BIKE_QUESTIONS : CAR_QUESTIONS;
+  if (mode === "consecutive") return [...sourceQuestions];
 
-  const questions = shuffleQuestions(QUESTIONS);
+  const questions = shuffleQuestions(sourceQuestions);
   return mode === "test" ? questions.slice(0, TEST_QUESTION_COUNT) : questions;
 };
 
-const createQuizState = (mode: QuizMode = "random"): QuizState => {
-  const questions = getQuestions(mode);
+const createQuizState = (
+  mode: QuizMode = "random",
+  vehicleType: VehicleType = "bike",
+): QuizState => {
+  const questions = getQuestions(mode, vehicleType);
 
   return {
+    vehicleType,
     mode,
     questions,
     answers: createAnswers(questions.length),
@@ -81,10 +94,13 @@ const gradeAllQuestions = (state: QuizState): Result[] =>
 const quizReducer = (state: QuizState, action: QuizAction): QuizState => {
   switch (action.type) {
     case "reset":
-      return createQuizState(state.mode);
+      return createQuizState(state.mode, state.vehicleType);
+
+    case "changeVehicle":
+      return createQuizState(state.mode, action.vehicleType);
 
     case "changeMode":
-      return createQuizState(action.mode);
+      return createQuizState(action.mode, state.vehicleType);
 
     case "toggleHint":
       return { ...state, isHintVisible: !state.isHintVisible };
@@ -175,6 +191,7 @@ export const App = () => {
     createQuizState(),
   );
   const {
+    vehicleType,
     mode,
     questions,
     answers,
@@ -217,6 +234,13 @@ export const App = () => {
     }
   };
 
+  const handleVehicleChange = (nextVehicleType: VehicleType) => {
+    if (nextVehicleType === vehicleType) return;
+    if (confirmRestart("Change vehicle and restart the quiz?")) {
+      dispatch({ type: "changeVehicle", vehicleType: nextVehicleType });
+    }
+  };
+
   const score = results.filter((result) => result === true).length;
   const wrongAnswers = questions.length - score;
   const passed = wrongAnswers <= MAX_WRONG_ANSWERS;
@@ -231,8 +255,22 @@ export const App = () => {
     <main className="app">
       <header className="top">
         <div className="top-row">
-          <h1>Malta Motorcycle Theory Test</h1>
+          <h1>
+            Malta {vehicleType === "bike" ? "Motorcycle" : "Car"} Theory Test
+          </h1>
           <div className="quiz-controls">
+            <label>
+              <span>Vehicle</span>
+              <select
+                value={vehicleType}
+                onChange={(event) =>
+                  handleVehicleChange(event.target.value as VehicleType)
+                }
+              >
+                <option value="bike">Bike</option>
+                <option value="car">Car</option>
+              </select>
+            </label>
             <label>
               <span>Mode</span>
               <select
