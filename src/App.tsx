@@ -7,6 +7,7 @@ import { isAnswerCorrect, shuffleQuestions, type QuizQuestion } from "./quiz";
 type VehicleType = "bike" | "car";
 type QuizMode = "random" | "consecutive" | "test";
 type Result = boolean | null;
+type Theme = "light" | "dark";
 
 type QuizState = {
   vehicleType: VehicleType;
@@ -34,6 +35,16 @@ type QuizAction =
 const TEST_QUESTION_COUNT = 35;
 const TEST_DURATION_SECONDS = 45 * 60;
 const MAX_WRONG_ANSWERS = 5;
+const THEME_STORAGE_KEY = "malta-theory-theme";
+
+const getInitialTheme = (): Theme => {
+  const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+  if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
 
 const createAnswers = (count: number): number[][] =>
   Array.from({ length: count }, () => []);
@@ -191,6 +202,7 @@ export const App = () => {
     createQuizState(),
   );
   const [isHeaderCollapsed, setIsHeaderCollapsed] = useState(false);
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
   const {
     vehicleType,
     mode,
@@ -203,6 +215,11 @@ export const App = () => {
     isFinished,
     error,
   } = state;
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+  }, [theme]);
 
   useEffect(() => {
     if (mode !== "test" || isFinished) return;
@@ -306,6 +323,18 @@ export const App = () => {
             </label>
             <button className="shuffle" type="button" onClick={handleRestart}>
               Restart
+            </button>
+            <button
+              className="shuffle"
+              type="button"
+              aria-pressed={theme === "dark"}
+              onClick={() =>
+                setTheme((currentTheme) =>
+                  currentTheme === "dark" ? "light" : "dark",
+                )
+              }
+            >
+              Dark
             </button>
           </div>
         </div>
