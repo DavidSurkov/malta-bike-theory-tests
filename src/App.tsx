@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 
 import { BIKE_QUESTIONS } from "./questions/bike";
 import { CAR_QUESTIONS } from "./questions/cars";
@@ -190,6 +190,7 @@ export const App = () => {
   const [state, dispatch] = useReducer(quizReducer, undefined, () =>
     createQuizState(),
   );
+  const [isHeaderCollapsed, setIsHeaderCollapsed] = useState(false);
   const {
     vehicleType,
     mode,
@@ -253,7 +254,26 @@ export const App = () => {
 
   return (
     <main className="app">
-      <header className="top">
+      <header className={`top${isHeaderCollapsed ? " collapsed" : ""}`}>
+        <button
+          className="top-toggle"
+          type="button"
+          aria-expanded={!isHeaderCollapsed}
+          aria-label={
+            isHeaderCollapsed
+              ? "Expand quiz controls"
+              : "Collapse quiz controls"
+          }
+          onClick={() => setIsHeaderCollapsed((isCollapsed) => !isCollapsed)}
+        >
+          <svg
+            className="top-chevron"
+            viewBox="0 0 16 16"
+            aria-hidden="true"
+          >
+            <path d="m3 10 5-5 5 5" />
+          </svg>
+        </button>
         <div className="top-row">
           <h1>
             Malta {vehicleType === "bike" ? "Motorcycle" : "Car"} Theory Test
@@ -366,7 +386,11 @@ export const App = () => {
               <div className="options">
                 {question.options.map((option, optionIndex) => (
                   <label
-                    className="option"
+                    className={`option${
+                      showFeedback && isHintVisible && option.correct
+                        ? " hint-correct"
+                        : ""
+                    }`}
                     key={`${question.id}-${option.text}`}
                   >
                     <input
@@ -392,6 +416,9 @@ export const App = () => {
                         option.text
                       )}
                     </span>
+                    {showFeedback && isHintVisible && option.correct && (
+                      <span className="visually-hidden">Correct answer</span>
+                    )}
                   </label>
                 ))}
               </div>
@@ -400,15 +427,6 @@ export const App = () => {
                 <p className="error" role="alert">
                   {error}
                 </p>
-              )}
-
-              {showFeedback && isHintVisible && (
-                <div className="hint">
-                  <strong>
-                    Correct answer{correctOptions.length > 1 ? "s" : ""}:
-                  </strong>{" "}
-                  {correctOptions.map((option) => option.text).join(", ")}
-                </div>
               )}
             </article>
 
